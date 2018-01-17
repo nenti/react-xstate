@@ -57,7 +57,7 @@ const appMachine = {
 export default mountXstate(appMachine, [appReducer])(App)
 ````
 
-This simple state machine implements an easy to use statechart that transition bewtween ping and pong and when you click in state ping you will trigger the `consoleLog` action.
+This simple state machine implements an easy to use statechart that transitions between ping and pong and when you click in state ping you will trigger the `consoleLog` action.
 
 ![State Machine](ppmachine.png "Ping Pong State Machine")
 
