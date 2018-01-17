@@ -9,7 +9,48 @@ Gives you easy access to improve your code structure.
 2. ``import { mountXstate } from 'react-xstate'``
 
 # Usage
-Mount the xstate machine to your component by applying a `machine` definition and at least one `reducer` to your component.
+Mount the xstate machine to your component by applying a `machine` definition and at least one `actionReducer` to your component.
+
+```js
+mountXstate(appMachine, [appReducer])(App)
+```
+
+## Example
+This simple state machine implements an easy to use statechart that transitions between ping and pong and when you click in state ping you will trigger the `consoleLog` action.
+
+![State Machine](ppmachine.png "Ping Pong State Machine")
+
+#### State Machine
+````js
+const appMachine = {
+  initial: 'pending',
+  states: {
+    ping: {
+      on: {
+        CLICK: {
+          pong: { actions: ['loadData'] }
+        }
+      }
+    },
+    pong: {
+      on: {
+        CLICK: 'ping',
+      }
+    },
+  }
+}
+````
+
+#### Action Reducer
+````js
+const appReducer = (action, event, xstate) => {
+  if(action === 'consoleLog') {
+    console.log('Fired action: consoleLog')
+  }
+}
+````
+
+#### Stateful Component
 
 ````js
 class App extends Component {
@@ -30,37 +71,8 @@ class App extends Component {
   }
 }
 
-const appReducer = (action, event, xstate) => {
-  if(action === 'consoleLog') {
-    console.log('Fired action: consoleLog')
-  }
-}
-
-const appMachine = {
-  initial: 'pending',
-  states: {
-    ping: {
-      on: {
-        CLICK: {
-          pong: { actions: ['loadData'] }
-        }
-      }
-    },
-    pong: {
-      on: {
-        CLICK: 'ping',
-      }
-    },
-  }
-}
-
 export default mountXstate(appMachine, [appReducer])(App)
 ````
-
-This simple state machine implements an easy to use statechart that transitions between ping and pong and when you click in state ping you will trigger the `consoleLog` action.
-
-![State Machine](ppmachine.png "Ping Pong State Machine")
-
 
 # Prop definition
 The higher order component mountXstate will exposes two new props to your component:
