@@ -28,7 +28,7 @@ const appMachine = {
     ping: {
       on: {
         CLICK: {
-          pong: { actions: ['loadData'] }
+          pong: { actions: ['consoleLog'] }
         }
       }
     },
