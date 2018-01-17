@@ -2,7 +2,7 @@
 Connecting react components with [xstate](https://github.com/davidkpiano/xstate) state machine library.
 
 # Why?
-Gives you easy access to improve your code structure.
+Gives you easy access to xstate in the react world and allows you to improve your code structure by extracting state handling into different files.
 
 # Installation
 1. ``npm install react-xstate --save``
