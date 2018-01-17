@@ -9,7 +9,7 @@ Gives you easy access to improve your code structure.
 2. ``import { mountXstate } from 'react-xstate'``
 
 # Usage
-Mount the xstate machine to your component by applying a `machine` definition and at least one reducer to your component.
+Mount the xstate machine to your component by applying a `machine` definition and at least one `reducer` to your component.
 
 ````js
 class App extends Component {
@@ -57,7 +57,7 @@ const appMachine = {
 export default mountXstate(appMachine, [appReducer])(App)
 ````
 
-The higher order component mountXstate will expose two new props two your component:
+The higher order component mountXstate will exposes two new props to your component:
 
 1. **xstate** prop which exposes the [state](http://davidkpiano.github.io/xstate/docs/#/api/state) of the state machine to enable the user to build statefull component logic
 2. **transition** prop which exposes the transition function to fire events towards your state machine.
