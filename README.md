@@ -57,6 +57,12 @@ const appMachine = {
 export default mountXstate(appMachine, [appReducer])(App)
 ````
 
+This simple state machine implements an easy to use statechart that transition bewtween ping and pong and when you click in state ping you will trigger the `consoleLog` action.
+
+![State Machine](ppmachine.png "Ping Pong State Machine")
+
+
+# Prop definition
 The higher order component mountXstate will exposes two new props to your component:
 
 1. **xstate** prop which exposes the [state](http://davidkpiano.github.io/xstate/docs/#/api/state) of the state machine to enable the user to build statefull component logic
