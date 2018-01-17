@@ -21,46 +21,47 @@ export const mountXstate = (stateMachine = {}, reducers = []) => (PassedComponen
             machine.transition(currentState, evt.type)
           const { value, actions } = nextState
           console.log(`StateEvent: ${JSON.stringify(evt)}, nextState: ${JSON.stringify(nextState)}`)
-        if (actions) {
-          const actionState = actions
+          if (actions) {
+            const actionState = actions
               .reduce((state, action) => ({
-              ...this.command(action, evt),
-              ...state,
-            }), {})
+                ...this.command(action, evt),
+                ...state,
+              }), {})
 
-          this.setState({
-            value,
-            ...actionState,
-        }, () => {
-            TRANSITION_QUEUE.shift()
-            console.log(`TRANSITION_QUEUE FINISH: ${JSON.stringify(TRANSITION_QUEUE)}`)
-            if (TRANSITION_QUEUE[0]) {
-              execFunction(TRANSITION_QUEUE[0]).catch(err => {
-                console.error(err)
+            this.setState({
+              value,
+              ...actionState,
+            }, () => {
+              TRANSITION_QUEUE.shift()
+              console.log(`TRANSITION_QUEUE FINISH: ${JSON.stringify(TRANSITION_QUEUE)}`)
+              if (TRANSITION_QUEUE[0]) {
+                execFunction(TRANSITION_QUEUE[0]).catch(err => {
+                  console.error(err)
+                })
+              }
             })
-            }
-          })
-        }
-      }).bind(this)))
+          }
+        }).bind(this)))
         execFunction(TRANSITION_QUEUE[0]).catch(err => {
           console.error(err)
-      })
+        })
       }
     }
     command(action, event) {
-      return reducers.reduce((state, reducer) => ({
+      return reducers
+        .reduce((state, reducer) => ({
           ...reducer(action, event, this),
           ...state,
-      }), {})
+        }), {})
     }
     render() {
       return (
         <PassedComponent
-      {...this.props}
-      xstate={this.state}
-      transition={this.transition}
-      />
-    )
+          {...this.props}
+          xstate={this.state}
+          transition={this.transition}
+        />
+      )
     }
   }
 }

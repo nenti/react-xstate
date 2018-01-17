@@ -1,10 +1,11 @@
 {
   "name": "react-xstate",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Connecting react components with xstate state machines.",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:dev": "cross-env BABEL_ENV=development babel src --out-dir lib"
   },
   "repository": {
     "type": "git",
@@ -25,5 +26,9 @@
   "peerDependencies": {
     "react": "^16.2.0",
     "xstate": "^3.0.1"
+  },
+  "devDependencies": {
+    "babel-preset-react-app": "^3.1.1",
+    "cross-env": "^5.1.3"
   }
 }
