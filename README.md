@@ -1,2 +1,2 @@
 # react-xstate
-Connecting react components with xcode state machines.
+Connecting react components with xstate state machines.

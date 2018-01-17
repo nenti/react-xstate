@@ -1,0 +1,29 @@
+{
+  "name": "react-xstate",
+  "version": "0.1.0",
+  "description": "Connecting react components with xstate state machines.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nenti/react-xstate.git"
+  },
+  "keywords": [
+    "xcode",
+    "statemachine",
+    "react",
+    "react-native"
+  ],
+  "author": "Tobias Nentwig <tobinenti@gmail.com> (http://github.com/nenti)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nenti/react-xstate/issues"
+  },
+  "homepage": "https://github.com/nenti/react-xstate#readme",
+  "peerDependencies": {
+    "react": "^16.2.0",
+    "xstate": "^3.0.1"
+  }
+}
