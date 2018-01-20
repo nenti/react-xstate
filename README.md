@@ -6,15 +6,15 @@ Connecting react components with [xstate](https://github.com/davidkpiano/xstate)
 
 Xstate allows you to improve state handling of your components by applying formal definition of a state machine including states and transitions. This allows you to better separate business logic from state handling and separate them into different files. You can use `react-xstate` to transition your UI-programming to model-driven-development which besides better code structure removes major error source and enables visual documentation.
 
-##### The xstate library
+### The xstate library:
 This library bases on the [xstate](https://github.com/davidkpiano/xstate) by David Khourshid
 - 📖 [Read the documentation!](http://davidkpiano.github.io/xstate/docs)
 - Get inspired by [📽 the slides](http://slides.com/davidkhourshid/finite-state-machines) ([🎥 video](https://www.youtube.com/watch?v=VU1NKX6Qkxc))
 - [Statecharts - A Visual Formalism for Complex Systems](http://www.inf.ed.ac.uk/teaching/courses/seoc/2005_2006/resources/statecharts.pdf) by David Harel
 - Checkout [xstate visualizer](https://codepen.io/davidkpiano/details/ayWKJO) for graph generation by David Khourshid
 
-##### Deep dive
-The `xstate` library implements the formal processing of state machines and leaves handling transitions, updating state and reducing actions to the user. This is where `react-xstate` comes into play and integrates state and transition handling directly into your react components, only by applying a `state machine` and `action reducers` and returning a `xstate` prop and a transition function.
+### React-xstate deepdive: 
+The `xstate` library implements the formal processing of state machines and leaves handling transitions, updating state and reducing actions to the user. This is where `react-xstate` comes into play and integrates state and transition handling directly into your react components, only by applying a `state machine` and `action reducers` and returning a `xstate` prop and a transition function. It also implements transition queueing to be able to fire transitions within action reducers.
 
 
 # Installation
