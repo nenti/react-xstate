@@ -8,7 +8,8 @@ Xstate allows you to improve state handling of your components by applying forma
 
 ##### The xstate library
 This library bases on the [xstate](https://github.com/davidkpiano/xstate) by David Khourshid
-- Read [📽 the slides](http://slides.com/davidkhourshid/finite-state-machines) ([🎥 video](https://www.youtube.com/watch?v=VU1NKX6Qkxc))
+- 📖 [Read the documentation!](http://davidkpiano.github.io/xstate/docs)
+- Get inspired by [📽 the slides](http://slides.com/davidkhourshid/finite-state-machines) ([🎥 video](https://www.youtube.com/watch?v=VU1NKX6Qkxc))
 - [Statecharts - A Visual Formalism for Complex Systems](http://www.inf.ed.ac.uk/teaching/courses/seoc/2005_2006/resources/statecharts.pdf) by David Harel
 - Checkout [xstate visualizer](https://codepen.io/davidkpiano/details/ayWKJO) for graph generation by David Khourshid
 
@@ -55,7 +56,7 @@ const appMachine = {
 
 #### Action Reducer
 ````js
-const appReducer = (action, event, xstate) => {
+const appReducer = (action) => {
   if(action === 'consoleLog') {
     console.log('Fired action: consoleLog')
   }
@@ -71,8 +72,8 @@ class App extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleSubmit() {
-    const { transition } = this.props
-    transition({ type: 'CLICK' })
+    // See transition definition prop below  
+    this.props.transition({ type: 'CLICK' })
   }
   render() {
     const { xstate: { value: state } } = this.props
@@ -86,9 +87,59 @@ class App extends Component {
 export default mountXstate(appMachine, [appReducer])(App)
 ````
 
-# Prop definition
-The higher order component mountXstate will exposes two new props to your component:
+# API
 
-1. **xstate** prop which exposes the [state](http://davidkpiano.github.io/xstate/docs/#/api/state) of the state machine to enable the user to build statefull component logic
-2. **transition** prop which exposes the transition function to fire events towards your state machine.
+## withXstate(statechart, [actionReducer])(Component)
 
+The `withXstate` higher-order component takes a statechart definition (see [xstate](https://github.com/davidkpiano/xstate)), an array of [actionReducers](#actionReducer(action,-event,-xstate)) and a component.
+It adds and exposes two new [props](#props) to your component: `transition` and `xstate`.
+
+### actionReducer(action, event, xstate)
+
+``ActionReducers`` are functions that are mounted onto the state machine and called upon every action execution. Return should be an object that is passed through as additional state onto the xstate prop.
+
+| Arg | Type | Description |
+| ------ | ---- | ----------- |
+| action | string | Returns the current action called. |
+| event | object | Additional payload of the transition triggering the action. |
+| xstate | object | Access the xstate component itself to e.g. call transition from action. |
+
+````js
+const reducer = (action, event, xstate) => {
+  const { transition } = xstate
+  if(action === 'loadData') {
+    fetch(event.url, event.payload)
+    return { loading: true }
+  }
+}
+````
+
+## Props
+
+### transition(event): function
+
+This function is hooked onto your components props and fires events towards your state machine. Expects an object with the event ``type`` and optionally and additional action payload that can be used by actionReducers to update the state.
+
+```js
+handleClick = () => {
+  this.props.transition({ type: 'FETCH', url: 'http://github.com' })
+}
+```
+#### Queueing transitions
+To enable transition chains by calling transition in action reducers we included a queued transition handling that queues transitions while there is already one transition happening.
+
+### xstate: object
+
+This object exposes the [state](http://davidkpiano.github.io/xstate/docs/#/api/state) of the state machine, including action reduced state, to enable the user to build stateful component logic.
+
+```js
+render = () => {
+  const { xstate: { value: state } } = this.props
+  return (
+    <div>
+      <button>Send</button>
+      {state === 'loading' && <div>Loading...</div>}
+    </div>
+  );
+}
+```
