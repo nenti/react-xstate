@@ -24,8 +24,8 @@ export const mountXstate = (stateMachine = {}, reducers = []) => (PassedComponen
           if (actions) {
             const actionState = actions
               .reduce((state, action) => ({
-                ...this.command(action, evt),
                 ...state,
+                ...this.command(action, evt),
               }), {})
 
             this.setState({

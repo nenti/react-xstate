@@ -1,6 +1,6 @@
 {
   "name": "react-xstate",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Connecting react components with xstate state machines.",
   "main": "lib/index.js",
   "scripts": {
