@@ -1,6 +1,6 @@
 {
   "name": "react-xstate",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Connecting react components with xstate state machines.",
   "main": "lib/index.js",
   "scripts": {
@@ -27,7 +27,7 @@
     "react": "^16.2.0",
     "xstate": "^3.0.1"
   },
-  "devDependencies": {
+  "dependencies": {
     "babel-preset-react-app": "^3.1.1",
     "cross-env": "^5.1.3"
   }
